@@ -19,19 +19,14 @@ function ajouterMultiplicateur() {
 }
 
 function analyser() {
-  if (historique.length === 0) return;
+  const nombre = historique.length;
 
   const total = historique.reduce((a, b) => a + b, 0);
-  const moyenne = total / historique.length;
+  const moyenne = total / nombre;
+
   const minimum = Math.min(...historique);
   const maximum = Math.max(...historique);
 
-  console.log("Résultats analysés :", historique);
-  console.log("Moyenne :", moyenne.toFixed(2) + "x");
-  console.log("Minimum :", minimum.toFixed(2) + "x");
-  console.log("Maximum :", maximum.toFixed(2) + "x");
-
-  // Indicateur statistique simple
   let niveau = "Normal";
 
   if (moyenne < 1.50) {
@@ -40,5 +35,15 @@ function analyser() {
     niveau = "Tendance élevée";
   }
 
-  console.log("Indicateur :", niveau);
+  document.getElementById("nombre").textContent = nombre;
+  document.getElementById("moyenne").textContent =
+    moyenne.toFixed(2) + "x";
+
+  document.getElementById("minimum").textContent =
+    minimum.toFixed(2) + "x";
+
+  document.getElementById("maximum").textContent =
+    maximum.toFixed(2) + "x";
+
+  document.getElementById("niveau").textContent = niveau;
 }
