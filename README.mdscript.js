@@ -16,11 +16,11 @@ function ajouterMultiplicateur() {
   input.value = "";
 
   analyser();
+  afficherHistorique();
 }
 
 function analyser() {
   const nombre = historique.length;
-
   const total = historique.reduce((a, b) => a + b, 0);
   const moyenne = total / nombre;
 
@@ -38,12 +38,25 @@ function analyser() {
   document.getElementById("nombre").textContent = nombre;
   document.getElementById("moyenne").textContent =
     moyenne.toFixed(2) + "x";
-
   document.getElementById("minimum").textContent =
     minimum.toFixed(2) + "x";
-
   document.getElementById("maximum").textContent =
     maximum.toFixed(2) + "x";
-
   document.getElementById("niveau").textContent = niveau;
+}
+
+function afficherHistorique() {
+  const zone = document.getElementById("historique");
+
+  zone.innerHTML = "";
+
+  historique.slice().reverse().forEach((valeur, index) => {
+    const resultat = document.createElement("p");
+
+    resultat.textContent =
+      "Résultat " + (historique.length - index) + " : " +
+      valeur.toFixed(2) + "x";
+
+    zone.appendChild(resultat);
+  });
 }
